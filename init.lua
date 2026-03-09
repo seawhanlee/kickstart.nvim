@@ -595,6 +595,8 @@ require('lazy').setup({
           if client and client:supports_method('textDocument/inlayHint', event.buf) then
             map('<leader>th', function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = event.buf }) end, '[T]oggle Inlay [H]ints')
           end
+
+          if client and client.name == 'ruff' then client.server_capabilities.hoverProvider = false end
         end,
       })
 
@@ -607,7 +609,6 @@ require('lazy').setup({
         -- gopls = {},
         -- pyright = {},
         -- rust_analyzer = {},
-        --
         -- Some languages (like typescript) have entire language plugins that can be useful:
         --    https://github.com/pmizio/typescript-tools.nvim
         --
@@ -644,6 +645,18 @@ require('lazy').setup({
             Lua = {},
           },
         },
+        pyright = {
+          settings = {
+            pyright = { disableOrganizeImports = true },
+            python = {
+              analysis = {
+                ignore = { '*' },
+                tyeCheckingMode = 'basic',
+              },
+            },
+          },
+        },
+        ruff = {},
       }
 
       -- Ensure the servers and tools above are installed
@@ -700,7 +713,7 @@ require('lazy').setup({
       formatters_by_ft = {
         lua = { 'stylua' },
         -- Conform can also run multiple formatters sequentially
-        -- python = { "isort", "black" },
+        python = { 'ruff_format', 'ruff_organize_imports' },
         --
         -- You can use 'stop_after_first' to run the first available formatter from the list
         -- javascript = { "prettierd", "prettier", stop_after_first = true },
