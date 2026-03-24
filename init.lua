@@ -614,6 +614,7 @@ require('lazy').setup({
         --
         -- But for many setups, the LSP (`ts_ls`) will work just fine
         -- ts_ls = {},
+        julials = {},
 
         stylua = {}, -- Used to format Lua code
 
@@ -835,7 +836,20 @@ require('lazy').setup({
       vim.cmd.colorscheme 'tokyonight-night'
     end,
   },
-
+  -- { -- Dayfox colorscheme from nightfox.nvim
+  --   'EdenEast/nightfox.nvim',
+  --   priority = 1000, -- Make sure to load this before all the other start plugins.
+  --   config = function()
+  --     require('nightfox').setup {
+  --       options = {
+  --         styles = {
+  --           comments = 'NONE', -- Disable italics in comments (matching your current preference)
+  --         },
+  --       },
+  --     }
+  --     vim.cmd.colorscheme 'dayfox'
+  --   end,
+  -- },
   -- Highlight todo, notes, etc in comments
   {
     'folke/todo-comments.nvim',
